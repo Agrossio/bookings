@@ -106,6 +106,12 @@ export default NextAuth({
         // no hace falta setear credenciales y pasamos directamente el metodo authorize:
         async authorize(credentials) {
 
+            /*
+             * puede ser que no funcione correctamente la version deployada porque estamos usando esta conexion (linea 115) con
+             * mongoose y en la linea 77 usamos la conexion con mongodb (adapter: MongoDBAdapter(clientPromise). Probe comentando
+             * esta linea (109) y pareciera que funcionaba igual..
+             */
+
             const client = await connectMongo();
 
             const foundUser = await User.findOne({ email: credentials.email })
